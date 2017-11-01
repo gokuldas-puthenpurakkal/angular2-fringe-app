@@ -1,0 +1,120 @@
+<body class="hold-transition skin-purple-light layout-top-nav " >
+<app-header-default></app-header-default>
+<div class="content-wrapper fringe-white-bg">
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="box box-solid fringe-box">
+            <div class="box-header with-border fringe-border-top">
+              <h3 class="box-title">Register as a partner</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form role="form" [formGroup]="registerPartnerForm" novalidate (ngSubmit)="onSubmit(registerPartnerForm)">
+                <!-- text input -->
+                <div class = col-md-6>
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+                  <div class="error" *ngIf="registerPartnerForm.get('firstName').hasError('required') && registerPartnerForm.get('firstName').touched">
+                      * Name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Last name</label>
+                  <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+                </div>
+                <div class="form-group">
+                  <label>Company Name</label>
+                  <input type="text" class="form-control" placeholder="Company Name (Optional)" formControlName="companyName">
+                </div>
+                <div class="form-group">
+                  <label>Contact Email</label>
+                  <input type="email" class="form-control" placeholder="Contact Email" formControlName="email">
+                </div>
+                <fieldset formGroupName="contactNumber">
+                <div class="form-group">
+                  <label>Phone Code</label>
+                  <select class="form-control" placeholder="+91" formControlName="mobileNumberCountryIso" (change)="onMobileNumberCountryIsoChange($event)">
+                    <option *ngFor="let countryDetails of _countries" value="{{countryDetails.countryISO}}">{{countryDetails.displayName}}&nbsp;+{{countryDetails.dialCode}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Mobile Number</label>
+                  <input type="text" class="form-control" placeholder="Mobile Number" style="background-color: #fff" formControlName="mobileNumber" disabled>
+                </div>
+                </fieldset>
+                </div>
+
+                <div class = col-md-6> 
+                <fieldset formGroupName="address">
+                <div class="form-group">
+                  <label>Country</label>
+                  <select class="form-control fringe-select" placeholder="Country" formControlName="locationCountryIso" (change)="onLocationCountryIsoChange($event)">
+                    <option *ngFor="let countryDetails of _countries" value="{{countryDetails.countryISO}}">{{countryDetails.displayName}}</option>
+                  </select>
+                </div> 
+                <div class="form-group">
+                  <label>Address Line 1</label>
+                  <input type="text" class="form-control" placeholder="Address Line 1" formControlName="addressLine1">
+                </div>
+                <div class="form-group">
+                  <label>Address Line 2</label>
+                  <input type="text" class="form-control" placeholder="Address Line 2" formControlName="addressLine2">
+                </div>
+                <div class="form-group">
+                  <label>Zip Code</label>
+                  <input type="text" class="form-control" placeholder="Zip Code / Locality" style="background-color: #fff" formControlName="zipcode" (keyup)="onZipCodeKeyUp($event)">
+                        <div class="suggestions" *ngIf="_locations!=null && _locations.length > 0 && _showZipCodeSuggestions==true">
+                          <ul>
+                             <li *ngFor="let location of _locations">
+                               <a (click)="onLocationClicked(location)">{{location.locationName}}</a>
+                            </li>
+                          </ul>
+                        </div>
+                </div>
+                <div class="form-group">
+                  <label>Locality</label>
+                  <input type="text" class="form-control" placeholder="Locality" style="background-color: #fff" formControlName="locationName">
+                </div>           
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" class="form-control" placeholder="City" style="background-color: #fff" formControlName="city">
+                </div>
+                <div class="form-group">
+                  <label>Region/State/Province</label>
+                  <input type="text" class="form-control" placeholder="Region/State/Province" style="background-color: #fff" formControlName="region">
+                </div>
+                </fieldset>
+                </div>
+                <div class = "col-md-12">
+                  <div class = "col-md-7">
+                     <div class="form-group">
+                  <label>
+                    &nbsp;
+                  </label>
+                <div class="checkbox">
+                  <label>
+                   <input type="checkbox">I agree to the Terms of Conditions and Privacy Policy
+                  </label>
+                </div>
+                </div>
+                  </div>
+                  <div class = "col-md-4">
+                 <div class="form-group">
+                  <label>&nbsp;</label>
+                  <button type = "submit" class="btn bg-purple btn-primary btn-block btn-flat ">Register</button>
+                </div>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>

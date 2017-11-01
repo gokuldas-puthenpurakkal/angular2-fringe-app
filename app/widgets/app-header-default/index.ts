@@ -1,0 +1,1 @@
+export { AppDefaultHeaderComponent } from './app-header-default.component';
